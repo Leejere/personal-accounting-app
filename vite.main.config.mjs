@@ -12,10 +12,6 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, "src/main.js"),
         preload: path.resolve(__dirname, "src/preload.js"),
-        initDataLoader: path.resolve(
-          __dirname,
-          "src/main-process/initDataLoader.js"
-        ),
       },
       external: ["serialport", "sqlite3"],
     },

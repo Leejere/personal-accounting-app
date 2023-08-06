@@ -45,4 +45,4 @@ const loadInitData = (mainWindow) => {
   });
 };
 
-module.exports = loadInitData;
+export { loadInitData };
