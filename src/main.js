@@ -1,7 +1,8 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
+// Handle creating/removing shortcuts on Windows
+// when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   app.quit();
 }
@@ -10,7 +11,9 @@ if (require("electron-squirrel-startup")) {
 const isDev = MAIN_WINDOW_VITE_DEV_SERVER_URL ? true : false;
 
 // On macOS?
-const isMac = process.platform === "darwin" ? true : false;
+const isMac = process.platform === "darwin";
+
+const loadInitData = require("./initDataLoader.js");
 
 const createWindow = () => {
   // Create the browser window.
@@ -34,6 +37,10 @@ const createWindow = () => {
   if (isDev) {
     mainWindow.webContents.openDevTools();
   }
+
+  mainWindow.webContents.on("did-finish-load", () => {
+    loadInitData(mainWindow);
+  });
 };
 
 app.on("ready", createWindow);
