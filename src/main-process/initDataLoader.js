@@ -1,7 +1,8 @@
-const { app } = require("electron");
-const path = require("path");
-const fs = require("fs");
-const Papa = require("papaparse");
+import { app } from "electron";
+import path from "path";
+import fs from "fs";
+import Papa from "papaparse";
+import { transformInitData } from "./transformInitData.js";
 
 /**
  *
@@ -14,7 +15,7 @@ const loadInitData = (mainWindow) => {
   if (!fs.existsSync(csvDir)) {
     mainWindow.webContents.send("init-data", {
       success: true,
-      data: [],
+      hasUserData: false,
     });
     return;
   }
@@ -30,9 +31,11 @@ const loadInitData = (mainWindow) => {
     Papa.parse(data, {
       header: true,
       complete: (result) => {
+        const processed = transformInitData(result.data);
         mainWindow.webContents.send("init-data", {
           success: true,
-          data: result.data,
+          hasUserData: true,
+          userData: processed,
         });
       },
       error: (error) => {
