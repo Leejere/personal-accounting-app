@@ -1,6 +1,8 @@
 import React, { createContext } from "react";
 import styles from "./index.module.css";
 
+import PropTypes from "prop-types";
+
 // Create a context, telling whatever button in it that "You are in a group!"
 export const ButtonGroupContext = createContext({ inGroup: false });
 
