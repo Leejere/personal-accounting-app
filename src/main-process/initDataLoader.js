@@ -5,24 +5,24 @@ import Papa from "papaparse";
 import { transformInitData } from "./transformInitData.js";
 
 /**
- *
+ * Partial process of loadInitData
+ * Load one file and send via channel
  * @param {*} mainWindow
- * @returns null
+ * @param {String} dir filename
+ * @param {String} channel
+ * @param {Function} callback to process data returned
  */
-const loadInitData = (mainWindow) => {
-  const userDataDir = app.getPath("userData");
-  const csvDir = path.join(userDataDir, "userCashFlow.csv");
-  if (!fs.existsSync(csvDir)) {
-    mainWindow.webContents.send("init-data", {
+const loadOneFile = (mainWindow, dir, channel, callback) => {
+  if (!fs.existsSync(dir)) {
+    mainWindow.webContents.send(channel, {
       success: true,
-      hasUserData: false,
+      hasData: false,
     });
     return;
   }
-
-  fs.readFile(csvDir, "utf8", (err, data) => {
+  fs.readFile(dir, "utf8", (err, data) => {
     if (err) {
-      mainWindow.webContents.send("init-data", {
+      mainWindow.webContents.send(channel, {
         success: false,
         error: err,
       });
@@ -31,21 +31,30 @@ const loadInitData = (mainWindow) => {
     Papa.parse(data, {
       header: true,
       complete: (result) => {
-        const processed = transformInitData(result.data);
-        mainWindow.webContents.send("init-data", {
+        const processed = callback(result.data);
+        mainWindow.webContents.send(channel, {
           success: true,
-          hasUserData: true,
-          userData: processed,
-        });
-      },
-      error: (error) => {
-        mainWindow.webContents.send("init-data", {
-          success: false,
-          error: error,
+          hasData: true,
+          data: processed,
         });
       },
     });
   });
 };
 
-export { loadInitData };
+/**
+ * Load stored user data from userDataDir/userCashFlow.csv
+ * extracts column types and returns the data
+ * @param {*} mainWindow
+ * @returns null
+ */
+const loadFiles = (mainWindow) => {
+  const userDataDir = app.getPath("userData");
+  const csvDir = path.join(userDataDir, "userCashFlow.csv");
+  const accountsDir = path.join(userDataDir, "accounts.json");
+
+  loadOneFile(mainWindow, csvDir, "init-data", transformInitData);
+  loadOneFile(mainWindow, accountsDir, "accounts-data", (data) => data);
+};
+
+export { loadFiles };

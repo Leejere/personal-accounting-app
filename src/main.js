@@ -1,6 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
-import { loadInitData } from "./main-process/initDataLoader.js";
+import { loadFiles } from "./main-process/initDataLoader.js";
 
 if (require("electron-squirrel-startup")) {
   app.quit();
@@ -33,7 +33,7 @@ const createWindow = () => {
 
   // Load init user data
   mainWindow.webContents.on("did-finish-load", () => {
-    loadInitData(mainWindow);
+    loadFiles(mainWindow);
   });
 };
 

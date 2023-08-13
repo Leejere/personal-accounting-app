@@ -40,7 +40,7 @@ const transformRow = (row, colTypes) => {
       sum += row[colName];
     }
   }
-
+  // Add total
   row["total"] = sum;
 
   return row;
