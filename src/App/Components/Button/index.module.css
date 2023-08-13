@@ -1,0 +1,7 @@
+.button {
+  border: 1px solid var(--palette-hero);
+  background-color: white;
+  color: var(--palette-hero);
+  border-radius: 4px;
+  cursor: pointer;
+}
