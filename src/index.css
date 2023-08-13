@@ -6,6 +6,24 @@ body {
   padding: 2rem;
 }
 
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("assets/font/JetBrainsMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("assets/font/JetBrainsMono-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: light;
+}
+
+* {
+  font-family: JetBrains Mono;
+}
+
 :root {
   --palette-hero: #353795;
 }
