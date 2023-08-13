@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import TabSwitch from "./TabSwitch";
 
 export default function App() {
   // All cashflow data
@@ -29,5 +30,5 @@ export default function App() {
     console.log(accounts);
   }, [accounts]);
 
-  return <>Hello</>;
+  return <TabSwitch />;
 }
