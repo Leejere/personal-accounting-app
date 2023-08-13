@@ -32,3 +32,8 @@
   border-radius: 0 4px 4px 0;
   border-left: none;
 }
+
+.selected {
+  background-color: var(--palette-hero);
+  color: white;
+}

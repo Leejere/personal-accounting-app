@@ -9,6 +9,39 @@ import BudgeterTab from "./BudgeterTab";
 
 import styles from "./App.module.css";
 
+const tabs = [
+  {
+    value: "SetterTab",
+    displayName: "Setter",
+    component: <SetterTab />,
+  },
+  {
+    value: "RecorderTab",
+    displayName: "Recorder",
+    component: <RecorderTab />,
+  },
+  {
+    value: "CashflowerTab",
+    displayName: "Cashflower",
+    component: <CashflowerTab />,
+  },
+  {
+    value: "BalancerTab",
+    displayName: "Balancer",
+    component: <BalancerTab />,
+  },
+  {
+    value: "TrackerTab",
+    displayName: "Tracker",
+    component: <TrackerTab />,
+  },
+  {
+    value: "BudgeterTab",
+    displayName: "Budgeter",
+    component: <BudgeterTab />,
+  },
+];
+
 export default function App() {
   // All cashflow data
   const [data, setData] = useState({});
@@ -44,15 +77,18 @@ export default function App() {
   return (
     <>
       <section className={styles.tabSwitch}>
-        <TabSwitch />
+        <TabSwitch
+          tabs={tabs}
+          onTabChange={(newTab) => setCurrentTab(newTab)}
+        />
       </section>
       <section className={styles.mainSection}>
-        <SetterTab show={currentTab === "SetterTab"} />
-        <RecorderTab show={currentTab === "RecorderTab"} />
-        <CashflowerTab show={currentTab === "CashflowerTab"} />
-        <BalancerTab show={currentTab === "BalancerTab"} />
-        <TrackerTab show={currentTab === "TrackerTab"} />
-        <BudgeterTab show={currentTab === "BudgeterTab"} />
+        {tabs.map((tab) => {
+          if (tab.value === currentTab) {
+            return <div key={tab.value}>{tab.component}</div>;
+          }
+          return null;
+        })}
       </section>
     </>
   );

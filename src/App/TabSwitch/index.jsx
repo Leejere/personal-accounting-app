@@ -2,12 +2,24 @@ import React from "react";
 import Button from "../Components/Button";
 import ButtonGroup from "../Components/ButtonGroup";
 
-export default function TabSwitch() {
+import PropTypes from "prop-types";
+
+export default function TabSwitch({ tabs, onTabChange }) {
   return (
-    <ButtonGroup>
-      <Button>Button 1</Button>
-      <Button>Button 2</Button>
-      <Button>Button 3</Button>
+    <ButtonGroup
+      onChange={(value) => onTabChange(value)}
+      initValue={tabs[0].value}
+    >
+      {tabs.map((tab) => (
+        <Button key={tab.value} value={tab.value}>
+          {tab.displayName}
+        </Button>
+      ))}
     </ButtonGroup>
   );
 }
+
+TabSwitch.propTypes = {
+  tabs: PropTypes.arrayOf(PropTypes.object).isRequired, // Array of tab objects
+  onTabChange: PropTypes.func, // Callback that takes selected tab as arg
+};

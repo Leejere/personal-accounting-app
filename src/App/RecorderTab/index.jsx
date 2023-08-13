@@ -2,12 +2,10 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
-export default function RecorderTab({ show }) {
-  return (
-    <section style={{ display: show ? "flex" : "none" }}>Recorder</section>
-  );
+export default function RecorderTab() {
+  return <section>Recorder</section>;
 }
 
 RecorderTab.propTypes = {
-  show: PropTypes.bool.isRequired,
+  // show: PropTypes.bool.isRequired,
 };
