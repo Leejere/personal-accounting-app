@@ -4,6 +4,12 @@ body {
   margin: auto;
   max-width: 38rem;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
 }
 
 @font-face {
@@ -22,8 +28,20 @@ body {
 
 * {
   font-family: JetBrains Mono;
+  box-sizing: border-box;
+}
+
+body * {
+  display: flex;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
 }
 
 :root {
   --palette-hero: #353795;
+  --palette-hero-dark: #323371;
+  --palette-hero-faded: #c8b7d9;
 }

@@ -2,6 +2,33 @@
   border: 1px solid var(--palette-hero);
   background-color: white;
   color: var(--palette-hero);
-  border-radius: 4px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  height: 24px;
+  align-items: center;
+}
+
+.button:hover {
+  background-color: var(--palette-hero);
+  color: white;
+}
+
+.button:active {
+  background-color: var(--palette-hero-faded);
+  border-color: var(--palette-hero-faded);
+  color: white;
+}
+
+.firstButton {
+  border-radius: 4px 0 0 4px;
+}
+
+.middleButton {
+  border-radius: 0;
+  border-left: none;
+}
+
+.lastButton {
+  border-radius: 0 4px 4px 0;
+  border-left: none;
 }
